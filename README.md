@@ -64,6 +64,17 @@ FoodFactory/
 
 ---
 
+## 📊 Presentation
+
+A professional PowerPoint presentation is available that showcases the FoodFactory project:
+
+- **File:** `FoodFactory_Presentation.pptx`
+- **Contents:** 10 slides covering Introduction, Features, Tech Stack, Architecture, Challenges, and more
+- **Usage:** Perfect for project demos, stakeholder presentations, or portfolio showcases
+- **Details:** See [PRESENTATION_README.md](PRESENTATION_README.md) for more information
+
+---
+
 ## 👤 Contributors
 
 - Vaibhav (imvaibhav100)
