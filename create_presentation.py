@@ -3,12 +3,13 @@
 Script to create a professional PowerPoint presentation for the FoodFactory project.
 """
 
+import os
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 from pptx.dml.color import RGBColor
 
-def create_foodfactory_presentation():
+def create_foodfactory_presentation(output_dir=None):
     """Create a professional presentation for FoodFactory project."""
     
     # Create presentation object
@@ -710,7 +711,13 @@ def create_foodfactory_presentation():
     contact_para.alignment = PP_ALIGN.CENTER
     
     # Save presentation
-    output_path = '/home/runner/work/Foodfactory/Foodfactory/FoodFactory_Presentation.pptx'
+    if output_dir is None:
+        # Use the directory where the script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        output_path = os.path.join(script_dir, 'FoodFactory_Presentation.pptx')
+    else:
+        output_path = os.path.join(output_dir, 'FoodFactory_Presentation.pptx')
+    
     prs.save(output_path)
     print(f"✅ Presentation created successfully: {output_path}")
     return output_path

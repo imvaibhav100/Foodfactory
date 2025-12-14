@@ -42,6 +42,12 @@ To regenerate or customize the presentation:
    ```bash
    python3 create_presentation.py
    ```
+   
+   Or specify a custom output directory:
+   ```python
+   from create_presentation import create_foodfactory_presentation
+   create_foodfactory_presentation(output_dir="/path/to/directory")
+   ```
 
 3. **Customize**: Edit `create_presentation.py` to modify:
    - Slide content
