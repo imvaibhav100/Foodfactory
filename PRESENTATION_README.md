@@ -6,6 +6,12 @@ This directory contains a professional PowerPoint presentation for the FoodFacto
 
 **File**: `FoodFactory_Presentation.pptx`
 
+### 📥 Download Options
+
+- **Direct Download**: [Download FoodFactory_Presentation.pptx](https://github.com/imvaibhav100/Foodfactory/raw/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
+- **View on GitHub**: [View on GitHub](https://github.com/imvaibhav100/Foodfactory/blob/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
+- **Clone Repository**: Use `git clone https://github.com/imvaibhav100/Foodfactory.git` and navigate to the branch
+
 ## 📝 Presentation Contents
 
 The presentation includes 10 professionally designed slides:
