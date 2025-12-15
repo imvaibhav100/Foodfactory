@@ -1,0 +1,320 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Custom colors - Food-themed
+\definecolor{primarycolor}{RGB}{230,74,25}    % Orange-red
+\definecolor{secondarycolor}{RGB}{255,165,0}  % Orange
+\definecolor{accentcolor}{RGB}{34,139,34}     % Green
+\definecolor{lightbg}{RGB}{255,248,240}       % Light cream
+
+\setbeamercolor{structure}{fg=primarycolor}
+\setbeamercolor{title}{fg=primarycolor}
+\setbeamercolor{frametitle}{fg=primarycolor,bg=lightbg}
+\setbeamercolor{block title}{fg=white,bg=primarycolor}
+\setbeamercolor{block body}{bg=lightbg}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Unicode support
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Title Information
+\title{FoodFactory}
+\subtitle{Modern Full-Stack Food Ordering Web Application}
+\author{Vaibhav}
+\date{\today}
+\institute{GitHub: imvaibhav100/Foodfactory}
+
+\begin{document}
+
+% =====================================================
+% SLIDE 1: TITLE SLIDE
+% =====================================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% =====================================================
+% SLIDE 2: INTRODUCTION
+% =====================================================
+\begin{frame}{Introduction}
+\begin{block}{Overview}
+FoodFactory is a modern, full-stack food ordering web application designed to revolutionize the online food delivery experience.
+\end{block}
+
+\vspace{0.3cm}
+
+\textbf{Built with enterprise-grade technologies, FoodFactory provides:}
+\begin{itemize}
+\item A seamless platform for users to browse and order delicious food online
+\item Robust admin management capabilities for efficient operations
+\item Secure authentication and user management
+\item Beautiful, responsive design for optimal user experience
+\end{itemize}
+
+\vspace{0.2cm}
+\textit{This project demonstrates real-world application development with industry best practices.}
+\end{frame}
+
+% =====================================================
+% SLIDE 3: KEY FEATURES (Part 1)
+% =====================================================
+\begin{frame}{Key Features}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{block}{User Management}
+\begin{itemize}
+\item Secure user registration \& login
+\item Password visibility toggle
+\item Role-based access control
+\end{itemize}
+\end{block}
+
+\begin{block}{Product Browsing}
+\begin{itemize}
+\item Wide variety of food items
+\item Intuitive product catalog
+\item Category-based organization
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Order Management}
+\begin{itemize}
+\item Seamless order placement
+\item Order success confirmation
+\item User-friendly checkout process
+\end{itemize}
+\end{block}
+
+\begin{block}{Admin Dashboard}
+\begin{itemize}
+\item Complete user management
+\item Product CRUD operations
+\item Admin account management
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+% SLIDE 4: KEY FEATURES (Part 2)
+% =====================================================
+\begin{frame}{Key Features (Continued)}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{block}{Modern UI/UX}
+\begin{itemize}
+\item Responsive design
+\item Beautiful CSS styling
+\item Mobile-friendly interface
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Security Features}
+\begin{itemize}
+\item Spring Security integration
+\item Secure authentication
+\item Data validation \& error handling
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+% SLIDE 5: TECHNOLOGY STACK
+% =====================================================
+\begin{frame}{Technology Stack}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{block}{Backend Technologies}
+\begin{itemize}
+\item Java 17
+\item Spring Boot 3.1.3
+\item Spring Security
+\item Spring Data JPA
+\item Maven
+\end{itemize}
+\end{block}
+
+\begin{block}{Database}
+\begin{itemize}
+\item MySQL
+\item JPA/Hibernate ORM
+\item JDBC Connection
+\end{itemize}
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Frontend Technologies}
+\begin{itemize}
+\item Thymeleaf Templates
+\item HTML5
+\item CSS3
+\item JavaScript
+\item Responsive Design
+\end{itemize}
+\end{block}
+
+\begin{block}{Development Tools}
+\begin{itemize}
+\item Git \& GitHub
+\item Spring Boot DevTools
+\item Maven Build System
+\end{itemize}
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+% SLIDE 6: ARCHITECTURE & DESIGN
+% =====================================================
+\begin{frame}{Architecture \& Design Patterns}
+\begin{block}{MVC Architecture Pattern}
+\begin{itemize}
+\item \textbf{Model:} Entity classes with JPA annotations
+\item \textbf{View:} Thymeleaf templates for dynamic rendering
+\item \textbf{Controller:} RESTful controllers handling HTTP requests
+\end{itemize}
+\end{block}
+
+\begin{block}{Layered Architecture}
+\begin{itemize}
+\item \textbf{Controller Layer:} Request handling and routing
+\item \textbf{Service Layer:} Business logic implementation
+\item \textbf{Repository Layer:} Data access with Spring Data JPA
+\item \textbf{Entity Layer:} Domain models and database mapping
+\end{itemize}
+\end{block}
+
+\begin{block}{Key Design Principles}
+Separation of Concerns • Dependency Injection • Single Responsibility Principle • RESTful API design
+\end{block}
+\end{frame}
+
+% =====================================================
+% SLIDE 7: CHALLENGES FACED
+% =====================================================
+\begin{frame}{Challenges Faced \& Solutions}
+\begin{block}{Security Implementation}
+\textbf{Challenge:} Implementing secure authentication and authorization \\
+\textcolor{accentcolor}{\textbf{Solution:}} Integrated Spring Security with custom user details service and password encoding
+\end{block}
+
+\begin{block}{UI/UX Consistency}
+\textbf{Challenge:} Maintaining consistent design across multiple pages \\
+\textcolor{accentcolor}{\textbf{Solution:}} Created modular CSS files and reusable Thymeleaf templates
+\end{block}
+
+\begin{block}{Database Integration}
+\textbf{Challenge:} Managing complex entity relationships \\
+\textcolor{accentcolor}{\textbf{Solution:}} Utilized JPA annotations and Spring Data repositories for efficient data handling
+\end{block}
+\end{frame}
+
+% =====================================================
+% SLIDE 8: PROJECT HIGHLIGHTS
+% =====================================================
+\begin{frame}{Project Highlights}
+\begin{columns}[t]
+\column{0.5\textwidth}
+\begin{block}{Production-Ready}
+Enterprise-grade code with proper error handling and validation
+\end{block}
+
+\begin{block}{Scalable Architecture}
+Modular design that supports future enhancements and features
+\end{block}
+
+\column{0.5\textwidth}
+\begin{block}{Responsive Design}
+Works seamlessly across desktop, tablet, and mobile devices
+\end{block}
+
+\begin{block}{Real-Time Operations}
+Dynamic content updates and seamless user interactions
+\end{block}
+\end{columns}
+\end{frame}
+
+% =====================================================
+% SLIDE 9: FUTURE ENHANCEMENTS
+% =====================================================
+\begin{frame}{Future Enhancements}
+\begin{block}{Planned Features \& Improvements}
+\begin{itemize}
+\item \textbf{Payment Gateway Integration}
+  \begin{itemize}
+  \item Support for multiple payment methods
+  \item Secure online transactions
+  \end{itemize}
+\item \textbf{Real-Time Order Tracking}
+  \begin{itemize}
+  \item Live order status updates
+  \item GPS-based delivery tracking
+  \end{itemize}
+\item \textbf{AI-Powered Recommendations}
+  \begin{itemize}
+  \item Personalized food suggestions
+  \item Smart ordering based on preferences
+  \end{itemize}
+\item \textbf{Analytics Dashboard}
+  \begin{itemize}
+  \item Sales reports and insights
+  \item User behavior analytics
+  \end{itemize}
+\item \textbf{Multi-Language Support:} Internationalization capabilities
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =====================================================
+% SLIDE 10: CONCLUSION
+% =====================================================
+\begin{frame}{Conclusion}
+\begin{block}{Summary}
+FoodFactory successfully demonstrates the implementation of a full-featured, production-ready food ordering platform using modern web technologies.
+\end{block}
+
+\vspace{0.2cm}
+
+\begin{block}{Key Takeaways}
+\begin{itemize}
+\item[\textcolor{accentcolor}{✓}] Robust backend with Spring Boot and Spring Security
+\item[\textcolor{accentcolor}{✓}] Intuitive frontend with Thymeleaf and responsive design
+\item[\textcolor{accentcolor}{✓}] Scalable architecture following industry best practices
+\item[\textcolor{accentcolor}{✓}] Complete CRUD operations for users, admins, and products
+\end{itemize}
+\end{block}
+
+\vspace{0.2cm}
+
+\textit{This project showcases practical application of full-stack development skills and serves as a solid foundation for real-world food delivery services.}
+
+\vspace{0.3cm}
+\centering
+\textbf{\textcolor{primarycolor}{GitHub: github.com/imvaibhav100/Foodfactory}}
+\end{frame}
+
+% =====================================================
+% SLIDE 11: Q&A
+% =====================================================
+\begin{frame}
+\begin{center}
+{\Huge \textcolor{primarycolor}{Questions \& Answers}}
+
+\vspace{1cm}
+
+{\Large Thank you for your attention!}
+
+\vspace{0.5cm}
+
+{\large Feel free to ask any questions!}
+\end{center}
+\end{frame}
+
+\end{document}

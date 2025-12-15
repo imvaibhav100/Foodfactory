@@ -66,14 +66,22 @@ FoodFactory/
 
 ## 📊 Presentation
 
-A professional PowerPoint presentation is available that showcases the FoodFactory project:
+Professional presentations are available in multiple formats that showcase the FoodFactory project:
 
+### PowerPoint Version
 - **File:** `FoodFactory_Presentation.pptx`
 - **Download Link:** [Click here to download the presentation](https://github.com/imvaibhav100/Foodfactory/raw/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
 - **View on GitHub:** [View file on GitHub](https://github.com/imvaibhav100/Foodfactory/blob/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
-- **Contents:** 10 slides covering Introduction, Features, Tech Stack, Architecture, Challenges, and more
-- **Usage:** Perfect for project demos, stakeholder presentations, or portfolio showcases
-- **Details:** See [PRESENTATION_README.md](PRESENTATION_README.md) for more information
+
+### LaTeX Beamer Version
+- **File:** `FoodFactory_Presentation.tex`
+- **Download Link:** [Click here to download the LaTeX file](https://github.com/imvaibhav100/Foodfactory/raw/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.tex)
+- **View on GitHub:** [View file on GitHub](https://github.com/imvaibhav100/Foodfactory/blob/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.tex)
+- **Compile:** Run `pdflatex FoodFactory_Presentation.tex` twice
+
+**Contents:** 11 slides covering Introduction, Features, Tech Stack, Architecture, Challenges, and more  
+**Usage:** Perfect for project demos, stakeholder presentations, or portfolio showcases  
+**Details:** See [PRESENTATION_README.md](PRESENTATION_README.md) for more information
 
 ---
 

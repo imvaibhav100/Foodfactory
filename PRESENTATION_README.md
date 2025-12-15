@@ -1,39 +1,65 @@
 # FoodFactory Presentation
 
-This directory contains a professional PowerPoint presentation for the FoodFactory project.
+This directory contains professional presentations for the FoodFactory project in multiple formats.
 
-## 📊 Presentation File
+## 📊 Presentation Files
 
+### PowerPoint Version
 **File**: `FoodFactory_Presentation.pptx`
 
-### 📥 Download Options
+### 📥 Download Options (PowerPoint)
 
 - **Direct Download**: [Download FoodFactory_Presentation.pptx](https://github.com/imvaibhav100/Foodfactory/raw/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
 - **View on GitHub**: [View on GitHub](https://github.com/imvaibhav100/Foodfactory/blob/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.pptx)
 - **Clone Repository**: Use `git clone https://github.com/imvaibhav100/Foodfactory.git` and navigate to the branch
 
+### LaTeX Beamer Version
+**File**: `FoodFactory_Presentation.tex`
+
+### 📥 Download Options (LaTeX)
+
+- **Direct Download**: [Download FoodFactory_Presentation.tex](https://github.com/imvaibhav100/Foodfactory/raw/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.tex)
+- **View on GitHub**: [View on GitHub](https://github.com/imvaibhav100/Foodfactory/blob/copilot/create-presentation-for-foodfactory/FoodFactory_Presentation.tex)
+
+**To compile the LaTeX Beamer presentation:**
+```bash
+pdflatex FoodFactory_Presentation.tex
+pdflatex FoodFactory_Presentation.tex  # Run twice for proper references
+```
+
+**Requirements:** LaTeX distribution (TeX Live, MiKTeX, or MacTeX) with Beamer package
+
 ## 📝 Presentation Contents
 
-The presentation includes 10 professionally designed slides:
+Both PowerPoint and LaTeX versions include 11 professionally designed slides:
 
 1. **Title Slide** - Project name and branding
 2. **Introduction** - Overview of FoodFactory and its purpose
-3. **Key Features** - Comprehensive list of application features
-4. **Technology Stack** - Backend, Frontend, Database, and Development Tools
-5. **Architecture & Design Patterns** - MVC architecture and layered design
-6. **Challenges Faced & Solutions** - Real-world problems and how they were solved
-7. **Project Highlights** - Key achievements and capabilities
-8. **Future Enhancements** - Planned features and improvements
-9. **Conclusion** - Summary and key takeaways
-10. **Q&A Section** - Interactive slide for questions and answers
+3. **Key Features (Part 1)** - User Management, Product Browsing, Order Management, Admin Dashboard
+4. **Key Features (Part 2)** - Modern UI/UX and Security Features
+5. **Technology Stack** - Backend, Frontend, Database, and Development Tools
+6. **Architecture & Design Patterns** - MVC architecture and layered design
+7. **Challenges Faced & Solutions** - Real-world problems and how they were solved
+8. **Project Highlights** - Key achievements and capabilities
+9. **Future Enhancements** - Planned features and improvements
+10. **Conclusion** - Summary and key takeaways
+11. **Q&A Section** - Interactive slide for questions and answers
 
 ## 🎨 Design Features
 
+### PowerPoint Version
 - **Modern Color Scheme**: Food-themed orange, red, and green colors
 - **Professional Layout**: Clean, organized slides with proper spacing
 - **Visual Elements**: Emojis and icons for better engagement
 - **Readable Fonts**: Appropriate font sizes for both technical and non-technical audiences
 - **Consistent Branding**: Unified design across all slides
+
+### LaTeX Beamer Version
+- **Theme**: Madrid theme with custom food-themed colors
+- **Color Scheme**: Matching the PowerPoint version (orange-red, orange, green)
+- **Professional Blocks**: Structured content with block environments
+- **Two-Column Layouts**: Efficient use of space for feature comparisons
+- **Clean Typography**: Standard LaTeX fonts optimized for presentations
 
 ## 🔄 Updating the Presentation
 
