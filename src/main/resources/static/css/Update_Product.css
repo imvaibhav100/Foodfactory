@@ -1,50 +1,135 @@
-body
-{
-	background-image: url("/Images/logo-white2.png");
-	background-repeat: no-repeat;
-	background-size: cover;
+@charset "UTF-8";
+
+/* Modern Update Product Form Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #ff6b35;
+    --secondary-color: #2ec4b6;
+    --dark-bg: #0f0f1a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-light: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --gradient-1: linear-gradient(135deg, #ff6b35 0%, #ff9f1c 100%);
+    --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
 }
-*{
-	color: rgb(192, 192, 192);
-	font-weight: bold;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.updateProduct{
-	background-color: transparent;
-	width: 400px;
-	height: 400px;
-	position: absolute;
-	left: 400px;
-	top: 30px;
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    color: var(--text-light);
 }
-input,textarea{
-	display: block;
-	padding: 5px;
-	border: none;
-	outline: none;
-	background-color: transparent;
-	border-bottom: 1px darkgreen solid;
-	font-size: 15px;
-	width: 200px;
-	color: aqua;
-	
+
+.updateProduct {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    width: 100%;
+    max-width: 500px;
+    padding: 50px 40px;
+    margin: 40px auto;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
-button
-{
-	color: rgb(192, 192, 192);
-	background-color: green;
-	border: 1px black solid;
-	padding: 9px;
-	cursor: pointer;
-	position: relative;
-	left: 45px;
-	font-weight: bold;
+
+.updateProduct h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    text-align: center;
 }
-a{
-	position: relative;
-	top: 20px;
-	border: 1px solid darkslategray;
-	padding: 10px;
-	background-color: darkslategray;
-	text-decoration: none;
-	
+
+input, textarea, select {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid var(--glass-border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-light);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 107, 53, 0.05);
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+}
+
+label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+button {
+    width: 100%;
+    padding: 16px 30px;
+    background: var(--gradient-1);
+    color: var(--text-light);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+}
+
+a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: transparent;
+    border: 2px solid var(--glass-border);
+    border-radius: 50px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    background: var(--secondary-color);
+    border-color: transparent;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .updateProduct {
+        margin: 20px;
+        padding: 30px 25px;
+    }
 }

@@ -1,74 +1,191 @@
-@charset "ISO-8859-1";
+@charset "UTF-8";
+
+/* Modern Admin Page Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #ff6b35;
+    --primary-dark: #e55a2b;
+    --secondary-color: #2ec4b6;
+    --accent-color: #ff9f1c;
+    --dark-bg: #0f0f1a;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-light: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --gradient-1: linear-gradient(135deg, #ff6b35 0%, #ff9f1c 100%);
+    --gradient-2: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+    --success-color: #2ec4b6;
+    --danger-color: #ff4757;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
-	background-color: rgb(48, 47, 47);
-	background-size: inherit;
-	background-repeat: round;
+    font-family: 'Poppins', sans-serif;
+    background: var(--gradient-2);
+    min-height: 100vh;
+    color: var(--text-light);
 }
 
 div {
-	background-color: rgb(0, 0, 0);
-	margin-top: 10px;
-	padding-bottom: 20px;
-	padding-top: 20px;
-
-
+    background: transparent;
+    margin-top: 0;
+    padding: 30px 20px;
 }
 
+/* Table Container */
 table {
-	width: 700px;
-	padding: 5px;
-	border: none;
-	box-shadow: 5px 5px 10px green;
-	margin-bottom: 40px;
-}
-
-
-td {
-
-	padding: 10px;
-	font-size: 18px;
-	font-weight: bold;
-	color:antiquewhite;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto 40px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 th {
-	padding: 12px;
-	background-color: green;
-	color:black;
+    padding: 18px 20px;
+    background: var(--gradient-1);
+    color: var(--text-light);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+td {
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--glass-border);
+    transition: background 0.3s ease;
+}
+
+tr:hover td {
+    background: rgba(255, 107, 53, 0.05);
+}
+
+tr:last-child td {
+    border-bottom: none;
 }
 
 h2 {
-	color: antiquewhite;
-	padding: 20px;
-
+    color: var(--text-light);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
+/* Action Buttons */
 .btns {
-
-	border: 1px green solid;
-	padding: 8px;
-	background-color: black;
-	text-decoration: none;
-	font-family: sans-serif;
-	font-weight: bold;
-	color: white;
-
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 2px solid var(--glass-border);
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btns:hover {
-	background-color: green;
-	transition: 1.3s;
+    background: var(--gradient-1);
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
+/* Edit Button */
+.btns.edit, a[href*="update"] {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btns.edit:hover, a[href*="update"]:hover {
+    background: var(--gradient-2);
+    background: linear-gradient(135deg, #2ec4b6 0%, #3de0d0 100%);
+    color: var(--text-light);
+    box-shadow: 0 8px 25px rgba(46, 196, 182, 0.3);
+}
+
+/* Delete Button */
+.btns.delete, a[href*="delete"] {
+    border-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+.btns.delete:hover, a[href*="delete"]:hover {
+    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+    color: var(--text-light);
+    box-shadow: 0 8px 25px rgba(255, 71, 87, 0.3);
+}
+
+/* Back Button */
 .back {
-		width: max-content;
-	color: white;
-	text-decoration: none;
-	border: 1px black solid;
-	padding: 10px;
-	background-color: darkslategray;
-	
-	position: fixed;
-	
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 14px 28px;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back:hover {
+    background: var(--gradient-1);
+    border-color: transparent;
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    th, td {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+    
+    .back {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin: 20px;
+    }
 }

@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>FoodFrenzy</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FoodFactory - Login</title>
 	<link rel="icon" type="image/x-icon" href="./img/b.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 	<link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
@@ -15,43 +16,47 @@
 	<div class="LoginContainer">
 		<div class="admin">
 			<div class="content">
-				<strong style="font-size: 16px;margin-bottom: 0px;">BUSINESS</strong>
-				<h2>For <span style="color:green;">Admins</span></h2>
+				<strong>BUSINESS</strong>
+				<h2>For <span>Admins</span></h2>
 
 				<form th:action="@{/adminLogin}" method="post">
-					<b>Email :</b>
-					<input type="email" name="email" placeholder="Enter email..." class="email"> <br />
-					<b>Password:</b>
+					<b><i class="fas fa-envelope"></i> Email</b>
+					<input type="email" name="email" placeholder="Enter your email..." class="email"> <br />
+					<b><i class="fas fa-lock"></i> Password</b>
 					<div class="password-wrapper">
-						<input type="password" name="password" placeholder="Enter password" class="password" id="adminPassword">
+						<input type="password" name="password" placeholder="Enter your password" class="password" id="adminPassword">
 						<span class="eye-btn" onclick="togglePassword('adminPassword', 'adminEye')">
 							<i id="adminEye" class="fa fa-eye"></i>
 						</span>
 					</div>
 					<small style="color: red;" th:text="${error}"></small><br />
-					<button type="submit" class="loginButton">Log in</button>
+					<button type="submit" class="loginButton">
+						<i class="fas fa-sign-in-alt"></i> Log in
+					</button>
 				</form>
 			</div>
 		</div>
 		<div class="user">
 			<div class="content">
-				<h2> For <span style="color:green;">Users</span></h2>
+				<h2>For <span>Users</span></h2>
 			   <form th:action="@{/userLogin}" method="post" th:object="${userLogin}" class="form">
-				   <b>Email :</b>
-				   <input type="email" th:field="*{uemail}" placeholder="Enter email"><br />
+				   <b><i class="fas fa-envelope"></i> Email</b>
+				   <input type="email" th:field="*{uemail}" placeholder="Enter your email"><br />
 
-				   <b>Password:</b>
+				   <b><i class="fas fa-lock"></i> Password</b>
 				   <div class="password-wrapper">
-				   <input type="password" th:field="*{upassword}" placeholder="Enter password" required maxlength="8" minlength="4" class="userPassword" id="userPassword">
+				   <input type="password" th:field="*{upassword}" placeholder="Enter your password" required maxlength="8" minlength="4" class="userPassword" id="userPassword">
 				   <span class="eye-btn" onclick="togglePassword('userPassword', 'userEye')">
 					   <i id="userEye" class="fa fa-eye"></i>
 				   </span>
 				   </div><br />
 
 				   <small style="color: red;" th:text="${error2}"></small><br />
-				   <button type="submit" class="loginButton">Log in</button><br>
+				   <button type="submit" class="loginButton">
+					   <i class="fas fa-sign-in-alt"></i> Log in
+				   </button><br>
 
-				   <p>I don't have an account? <a th:href="@{/register}" style="color: green;">Register Here</a></p>
+				   <p>Don't have an account? <a th:href="@{/register}">Register Here <i class="fas fa-arrow-right"></i></a></p>
 			   </form>
 			</div>
 		</div>

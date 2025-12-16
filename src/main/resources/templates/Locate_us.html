@@ -1,79 +1,343 @@
 <!doctype html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8" />
-	<title>FoodFactory</title>
-	<link rel="icon" type="image/x-icon" href="./img/b.png">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
-	<link rel="stylesheet" href="" th:href="@{/css/Locate_us.css}" />
-	<style>
-		.icons{
-			align-items: center;
-		}
-	</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locate Us - FoodFactory</title>
+    <link rel="icon" type="image/x-icon" href="./Images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/Navigation.css}" />
 </head>
-
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+    
+    :root {
+        --primary-color: #ff6b35;
+        --secondary-color: #2ec4b6;
+        --dark-bg: #0f0f1a;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+        color: white;
+        min-height: 100vh;
+    }
+    
+    /* Hero Section */
+    .location-hero {
+        text-align: center;
+        padding: 80px 20px 40px;
+        background: linear-gradient(135deg, rgba(46, 196, 182, 0.1) 0%, transparent 100%);
+    }
+    
+    .location-hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        background: linear-gradient(135deg, #2ec4b6, #3de0d0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 15px;
+        font-weight: 800;
+    }
+    
+    .location-hero p {
+        font-size: 1rem;
+        color: rgba(255, 107, 53, 0.8);
+        font-weight: 500;
+    }
+    
+    /* Main Container */
+    .location-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 60px 20px;
+    }
+    
+    /* Map Section */
+    .map-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    
+    .map-section iframe {
+        width: 100%;
+        height: 500px;
+        border-radius: 15px;
+        border: 2px solid var(--glass-border);
+    }
+    
+    /* Contact Grid */
+    .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+    
+    .contact-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.4s ease;
+    }
+    
+    .contact-card:hover {
+        transform: translateY(-10px);
+        border-color: var(--primary-color);
+        box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+    }
+    
+    .contact-card i {
+        font-size: 3rem;
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: white;
+    }
+    
+    .contact-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: white;
+    }
+    
+    .contact-card p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.6;
+        font-size: 1rem;
+    }
+    
+    /* Contact Form Section */
+    .form-section {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 50px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .form-section h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .form-section p {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .form-group label {
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 2px solid var(--glass-border);
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.2);
+    }
+    
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .form-group textarea {
+        resize: vertical;
+        min-height: 150px;
+    }
+    
+    .submit-btn {
+        padding: 18px 40px;
+        background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+        border: none;
+        border-radius: 50px;
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+    }
+    
+    /* Footer */
+    .footer {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: 60px;
+        border-top: 1px solid var(--glass-border);
+    }
+    
+    .footer p {
+        color: rgba(255, 255, 255, 0.6);
+        margin: 5px 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .location-hero {
+            padding: 60px 20px 30px;
+        }
+        
+        .map-section {
+            padding: 25px;
+        }
+        
+        .map-section iframe {
+            height: 350px;
+        }
+        
+        .form-section {
+            padding: 30px 20px;
+        }
+        
+        .contact-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 <body>
-	<nav th:replace="~{Navigation::navbar()}"></nav>
-	<center>
-		<h1 style="color: orangered; ">Our Location</h1>
-		<small style="color: red;font-weight: bold;">Internet required..</small>
-	</center>
-	<div class="location">
-<section class="location">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14416.75210164425!2d81.87345899999995!3d25.398516000000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1734794284982!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>    </section>
-
-    </section>
-
-    <section class="contact-us">
-        <div class="row">
-            <div class="contact-col">
-                <div>
-                    <i class="contact-icon fas fa-home"></i>
-                    <span>
-                        <h5>95/5, 1st Floor, Infront  of Hanuman Mandir, near Shani Mandir, Naini, Prayagraj,Uttar Pradesh 211008</h5>
-                        <p>Prayagraj, India</p>
-                    </span>
-                </div>
-
-                <div>
-                    <i class="contact-icon fas fa-phone"></i>
-                    <span>
-                        <h5>+919506620945</h5>
-                        <p>Monday to Saturday, 10AM to 8PM</p>
-                    </span>
-                </div>
-
-                <div>
-                    <i class="contact-icon fas fa-envelope"></i>
-                    <span>
-                        <h5>imvaibhavshukla100@gmail.com</h5>
-                        <p>Email us your query</p>
-                    </span>
-                </div>
+    <nav th:replace="~{Navigation::navbar()}"></nav>
+    
+    <!-- Hero Section -->
+    <div class="location-hero">
+        <h1>Find Us Here</h1>
+        <p><i class="fas fa-wifi"></i> Internet required for map</p>
+    </div>
+    
+    <div class="location-container">
+        <!-- Map Section -->
+        <div class="map-section">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14416.75210164425!2d81.87345899999995!3d25.398516000000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1734794284982!5m2!1sen!2sin" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        
+        <!-- Contact Info Grid -->
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Our Address</h3>
+                <p>95/5, 1st Floor, Infront of Hanuman Mandir, near Shani Mandir<br>Naini, Prayagraj<br>Uttar Pradesh 211008</p>
             </div>
-            <div class="contact-col">
-                <form action="" method="post" enctype="text/plain">
-                    <input type="text" name="name" placeholder="Enter your name" required>
-                    <input type="email" name="email" placeholder="Enter email address" required>
-                    <input type="text" name="subject" placeholder="Enter subject" required>
-                    <textarea rows="8" name="message" placeholder="Message" required></textarea>
-                    <button type="submit" class="visit-btn red-btn">Send</button>
-                </form>
+            
+            <div class="contact-card">
+                <i class="fas fa-phone-alt"></i>
+                <h3>Call Us</h3>
+                <p>+91 9506620945<br><br>Monday to Saturday<br>10:00 AM - 8:00 PM</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>imvaibhavshukla100@gmail.com<br><br>We'll respond within 24 hours</p>
             </div>
         </div>
-    </section>
-
-    <section class="footer">
-        <h4 style="text-align: center;">About Us</h4>
-        <p style="text-align: center;">
-        ”Explore our wide range of products designed to enhance your life."
-        </p>
-            <p style="text-align: center;">© Copyright 2024 FoodFactory</pstyle="text-align: center;">
+        
+        <!-- Contact Form -->
+        <div class="form-section">
+            <h2>Send Us a Message</h2>
+            <p>Have a question? We'd love to hear from you!</p>
+            
+            <form class="contact-form" action="#" method="post">
+                <div class="form-group">
+                    <label for="name"><i class="fas fa-user"></i> Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+                    <input type="text" id="subject" name="subject" placeholder="What is this about?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message"><i class="fas fa-comment"></i> Your Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us more..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
         </div>
-    </section>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p><strong>FoodFactory</strong> - 100% Pure Vegetarian</p>
+        <p>© Copyright 2025 FoodFactory. All Rights Reserved.</p>
+    </div>
 </body>
-
 </html>

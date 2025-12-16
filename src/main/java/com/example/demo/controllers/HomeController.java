@@ -25,6 +25,7 @@ public class HomeController {
 	public String products(Model model) {
 		List<Product> allProducts = this.productServices.getAllProducts();
 		model.addAttribute("products", allProducts);
+		model.addAttribute("isLoggedIn", false);
 		return "Products";
 	}
 

@@ -1,47 +1,350 @@
 <!doctype html>
-<html lang="en" xmnls:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Order Successful - FoodFactory</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <style>
-	body{
-		background-color:navajowhite;
-		font-family: cursive;
-		font-size: 30px;
-		
+	:root {
+		--primary-color: #ff6b35;
+		--primary-light: #ff9f1c;
+		--secondary-color: #2ec4b6;
+		--success-color: #00c851;
+		--success-dark: #007e33;
+		--dark-bg: #0f0f1a;
+		--darker-bg: #1a1a2e;
+		--card-bg: rgba(255, 255, 255, 0.05);
+		--glass-border: rgba(255, 255, 255, 0.1);
+		--text-primary: #ffffff;
+		--gradient-success: linear-gradient(135deg, #00c851, #2ec4b6);
 	}
-	.text{
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Poppins', sans-serif;
+	}
+
+	body {
+		min-height: 100vh;
+		background: var(--dark-bg);
+		background-image: 
+			radial-gradient(ellipse at 30% 20%, rgba(0, 200, 81, 0.15) 0%, transparent 50%),
+			radial-gradient(ellipse at 70% 80%, rgba(46, 196, 182, 0.1) 0%, transparent 50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 20px;
 		position: relative;
-		left: 250px;
-		top: 200px;
-		text-align: center;
-		height: max-content;
-		width: max-content;
+		overflow: hidden;
 	}
-	span,h4
-	{
-		color: green;
+
+	/* Animated Background Circles */
+	body::before,
+	body::after {
+		content: '';
+		position: absolute;
+		border-radius: 50%;
+		animation: pulse 4s ease-in-out infinite;
 	}
-	a{
-		border: 1px solid black;
+
+	body::before {
+		width: 400px;
+		height: 400px;
+		background: radial-gradient(circle, rgba(0, 200, 81, 0.1) 0%, transparent 70%);
+		top: -100px;
+		right: -100px;
+	}
+
+	body::after {
+		width: 300px;
+		height: 300px;
+		background: radial-gradient(circle, rgba(46, 196, 182, 0.1) 0%, transparent 70%);
+		bottom: -50px;
+		left: -50px;
+		animation-delay: 2s;
+	}
+
+	@keyframes pulse {
+		0%, 100% { transform: scale(1); opacity: 0.5; }
+		50% { transform: scale(1.2); opacity: 0.8; }
+	}
+
+	/* Back Button */
+	.back-btn {
+		position: fixed;
+		top: 30px;
+		left: 30px;
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 14px 28px;
+		background: var(--card-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		color: var(--text-primary);
 		text-decoration: none;
-		background-color: darkgreen;
-		color: aliceblue;
-		font-family: sans-serif;
-		padding: 5px;
+		border-radius: 50px;
+		font-weight: 500;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		z-index: 100;
 	}
-	
+
+	.back-btn:hover {
+		background: var(--gradient-success);
+		border-color: transparent;
+		transform: translateX(-5px);
+		box-shadow: 0 10px 30px rgba(0, 200, 81, 0.3);
+	}
+
+	/* Success Card */
+	.success-card {
+		background: var(--card-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		border-radius: 30px;
+		padding: 60px 80px;
+		text-align: center;
+		position: relative;
+		z-index: 10;
+		animation: slideUp 0.8s ease-out;
+		max-width: 550px;
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(50px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Success Icon */
+	.success-icon {
+		width: 120px;
+		height: 120px;
+		background: var(--gradient-success);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 30px;
+		animation: bounceIn 1s ease-out 0.3s both;
+		box-shadow: 0 20px 60px rgba(0, 200, 81, 0.4);
+	}
+
+	@keyframes bounceIn {
+		0% {
+			transform: scale(0);
+			opacity: 0;
+		}
+		50% {
+			transform: scale(1.2);
+		}
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	.success-icon i {
+		font-size: 3.5rem;
+		color: white;
+	}
+
+	/* Checkmark Animation */
+	.checkmark-circle {
+		stroke-dasharray: 166;
+		stroke-dashoffset: 166;
+		animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+	}
+
+	.checkmark-check {
+		stroke-dasharray: 48;
+		stroke-dashoffset: 48;
+		animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 1s forwards;
+	}
+
+	@keyframes stroke {
+		100% { stroke-dashoffset: 0; }
+	}
+
+	/* Text Styles */
+	.success-title {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--success-color);
+		margin-bottom: 15px;
+		animation: fadeIn 0.8s ease-out 0.6s both;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.success-subtitle {
+		font-size: 1.1rem;
+		color: rgba(255, 255, 255, 0.7);
+		margin-bottom: 30px;
+		animation: fadeIn 0.8s ease-out 0.8s both;
+	}
+
+	/* Amount Display */
+	.amount-box {
+		background: rgba(0, 200, 81, 0.1);
+		border: 2px solid rgba(0, 200, 81, 0.3);
+		border-radius: 20px;
+		padding: 25px 40px;
+		margin: 30px 0;
+		animation: fadeIn 0.8s ease-out 1s both;
+	}
+
+	.amount-label {
+		font-size: 0.95rem;
+		color: rgba(255, 255, 255, 0.6);
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin-bottom: 10px;
+	}
+
+	.amount-value {
+		font-size: 3rem;
+		font-weight: 700;
+		background: var(--gradient-success);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	/* Continue Button */
+	.continue-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		padding: 18px 45px;
+		background: var(--gradient-success);
+		color: white;
+		text-decoration: none;
+		border-radius: 50px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		margin-top: 20px;
+		animation: fadeIn 0.8s ease-out 1.2s both;
+	}
+
+	.continue-btn:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 15px 40px rgba(0, 200, 81, 0.4);
+	}
+
+	.continue-btn i {
+		transition: transform 0.3s ease;
+	}
+
+	.continue-btn:hover i {
+		transform: translateX(5px);
+	}
+
+	/* Confetti Animation */
+	.confetti {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		background: var(--success-color);
+		animation: confetti-fall 3s ease-in-out infinite;
+	}
+
+	@keyframes confetti-fall {
+		0% {
+			transform: translateY(-100vh) rotate(0deg);
+			opacity: 1;
+		}
+		100% {
+			transform: translateY(100vh) rotate(720deg);
+			opacity: 0;
+		}
+	}
+
+	/* Responsive */
+	@media (max-width: 600px) {
+		.success-card {
+			padding: 40px 30px;
+			margin: 20px;
+		}
+
+		.success-icon {
+			width: 100px;
+			height: 100px;
+		}
+
+		.success-icon i {
+			font-size: 2.5rem;
+		}
+
+		.success-title {
+			font-size: 1.5rem;
+		}
+
+		.amount-value {
+			font-size: 2.2rem;
+		}
+
+		.back-btn {
+			top: 15px;
+			left: 15px;
+			padding: 10px 20px;
+			font-size: 0.9rem;
+		}
+	}
 </style>
 
 <body>
-		<a href="/product/back" >Back</a>
-	<div class="text">
-		<h4>Ordered SuccessFully... !!!</h4>
-		<h3 style="font-family: sans-serif;">Your purchased amount is : <span th:text="'₹ '+${amount}+'/-'"></span></h3>
-	</div>
+	<!-- Confetti Elements -->
+	<div class="confetti" style="left: 10%; animation-delay: 0s; background: #ff6b35;"></div>
+	<div class="confetti" style="left: 20%; animation-delay: 0.5s; background: #2ec4b6;"></div>
+	<div class="confetti" style="left: 30%; animation-delay: 1s; background: #00c851;"></div>
+	<div class="confetti" style="left: 40%; animation-delay: 1.5s; background: #ff9f1c;"></div>
+	<div class="confetti" style="left: 50%; animation-delay: 2s; background: #ff6b35;"></div>
+	<div class="confetti" style="left: 60%; animation-delay: 0.3s; background: #2ec4b6;"></div>
+	<div class="confetti" style="left: 70%; animation-delay: 0.8s; background: #00c851;"></div>
+	<div class="confetti" style="left: 80%; animation-delay: 1.3s; background: #ff9f1c;"></div>
+	<div class="confetti" style="left: 90%; animation-delay: 1.8s; background: #ff6b35;"></div>
 
+	<!-- Back Button -->
+	<a href="/user/dashboard" class="back-btn">
+		<i class="fas fa-arrow-left"></i> Back to Dashboard
+	</a>
+
+	<!-- Success Card -->
+	<div class="success-card">
+		<div class="success-icon">
+			<i class="fas fa-check"></i>
+		</div>
+		
+		<h1 class="success-title">Order Placed Successfully! 🎉</h1>
+		<p class="success-subtitle">Thank you for your order. Your delicious food is on the way!</p>
+		
+		<div class="amount-box">
+			<p class="amount-label">Total Amount Paid</p>
+			<p class="amount-value" th:text="'₹' + ${orderTotal}">₹0</p>
+		</div>
+		
+		<a href="/user/dashboard" class="continue-btn">
+			Continue Shopping <i class="fas fa-arrow-right"></i>
+		</a>
+	</div>
 </body>
 
 </html>

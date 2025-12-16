@@ -1,161 +1,546 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodFactory</title> 
+    <title>Products - FoodFactory</title> 
     <link rel="icon" type="image/x-icon" href="./Images/logo.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
-    <link rel="stylesheet" href="" th:href="@{css/Products.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff6b35;
+            --primary-light: #ff9f1c;
+            --secondary-color: #2ec4b6;
+            --dark-bg: #0f0f1a;
+            --darker-bg: #1a1a2e;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 50%, var(--dark-bg) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        /* Navigation - Common for both logged in and logged out */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+            flex: 1;
+            margin: 0 30px;
+        }
+
+        li {
+            display: flex;
+        }
+
+        a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        a:hover, a.active {
+            color: #fff;
+            background: rgba(255, 107, 53, 0.2);
+        }
+
+        a.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-greeting {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: rgba(255, 71, 87, 0.2);
+            color: #ff4757;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 71, 87, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #ff4757;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 100px 30px 40px;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Product Card */
+        .product-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .rating {
+            color: #ffc107;
+            background: rgba(255, 193, 7, 0.2);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .rating::before {
+            content: "\2B50 ";
+        }
+
+        .add-to-favorites {
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.3rem;
+        }
+
+        .add-to-favorites:hover {
+            color: #ff4757;
+            transform: scale(1.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(46, 196, 182, 0.2));
+        }
+
+        .product-details {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .product-description {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            text-align: center;
+            height: 40px;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            color: var(--primary-light);
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .product-price::before {
+            content: "\20B9";
+        }
+
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .buy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+                height: auto;
+                flex-wrap: wrap;
+            }
+
+            ul {
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 15px;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+
+            .nav-user {
+                order: 2;
+            }
+
+            .main-container {
+                padding: 130px 15px 30px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <nav th:replace="~{Navigation::navbar()}"></nav>
-    <div id="main-container">
-    <div id="biryani"> 
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images/biryani/Biryani_of_Hyderabadi.jpg" alt="Chicken Biryani">
-            <p class="item-name">Chicken Biryani</p>
-            <p class="item-price">Price: Rs 410</p>
-            <a href="/login" id="buy">Buy Now</a>
+    <!-- Logged In Navigation -->
+    <nav th:if="${isLoggedIn}">
+        <div class="nav-brand">
+            <i class="fas fa-utensils"></i>
+            <span>FoodFactory</span>
         </div>
- 
- <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images//paneer/paneer-butter-masala.jpg" alt="Chicken Biryani">
-            <p class="item-name">Paneer Butter </p>
-            <p class="item-price">Price: Rs 290</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div> 
-         
-         <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images/chicken/Afgani-chicken-curry.jpg" alt="Chicken Biryani">
-            <p class="item-name">Afgani Chicken</p>
-            <p class="item-price">Price: Rs 410</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div> 
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images/chicken/butter-chicken.jpg" alt="Chicken Biryani">
-            <p class="item-name">Butter Chicken</p>
-            <p class="item-price">Price: Rs 380</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div> 
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images/north-india-food/Laccha-Paratha.jpg" alt="Chicken Biryani">
-            <p class="item-name">Laccha Paratha</p>
-            <p class="item-price">Price: Rs 30</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div> 
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
-            </div>
-            <img src="./Images/chicken/Matka-Chicken.jpg" alt="Chicken Biryani">
-            <p class="item-name">Matka-Chicken</p>
-            <p class="item-price">Price: Rs 510</p>
-            <a href="/login" id="buy">Buy Now</a>
+        <ul>
+            <li><a href="/user/home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/user/dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="/user/location"><i class="fas fa-map-marker-alt"></i> Locate Us</a></li>
+            <li><a href="/user/about"><i class="fas fa-info-circle"></i> About</a></li>
+        </ul>
+        <div class="nav-user">
+            <span class="user-greeting"><i class="fas fa-user-circle"></i> <span th:text="${name}">User</span></span>
+            <a href="/user/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
-      
-      <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+    </nav>
+
+    <!-- Logged Out Navigation -->
+    <nav th:if="${!isLoggedIn}">
+        <div class="nav-brand">
+            <i class="fas fa-utensils"></i>
+            <span>FoodFactory</span>
+        </div>
+        <ul>
+            <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/products" class="active"><i class="fas fa-utensils"></i> Products</a></li>
+            <li><a href="/location"><i class="fas fa-map-marker-alt"></i> Locate Us</a></li>
+            <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-shopping-bag"></i> Our Delicious Products</h1>
+            <p>Explore our wide range of authentic vegetarian dishes</p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" th:if="${products != null and !#lists.isEmpty(products)}">
+            <div class="product-card" th:each="product : ${products}">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img th:src="${product.imageUrl}" alt="Product" class="product-image"
+                     onerror="this.onerror=null; this.style.background='linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(46, 196, 182, 0.3))'; this.alt='Image not available';">
+                <div class="product-details">
+                    <div class="product-name" th:text="${product.pname}">Product Name</div>
+                    <div class="product-description" th:text="${product.pdescription}">Description</div>
+                    <div class="product-price" th:text="${product.pprice}">0</div>
+                    <a href="#" class="buy-btn">
+                        <i class="fas fa-shopping-cart"></i> Buy Now
+                    </a>
+                </div>
             </div>
-            <img src="./Images/chicken/Tandoori-chicken-tikka.jpg" alt="Chicken Biryani">
-            <p class="item-name">Chicken Tikka</p>
-            <p class="item-price">Price: Rs 310</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div> 
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+        </div>
+
+        <!-- Static Products (Fallback) -->
+        <div class="products-grid" th:if="${products == null or #lists.isEmpty(products)}">
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/paneer/paneer-butter-masala.jpg" alt="Paneer Butter Masala" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Paneer Butter Masala</div>
+                    <div class="product-description">Creamy tomato-based curry with cottage cheese</div>
+                    <div class="product-price">290</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
             </div>
-            <img src="./Images/north-india-food/Honey-Chilli-Potato.jpg" alt="Chicken Biryani">
-            <p class="item-name">Chilli Potato</p>
-            <p class="item-price">Price: Rs 150</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div>   
-         
-         <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">5.0</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/paneer/paneer-do-pyaza.jpg" alt="Paneer Do Pyaza" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Paneer Do Pyaza</div>
+                    <div class="product-description">Paneer cooked with double the amount of onions</div>
+                    <div class="product-price">270</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
             </div>
-            <img src="./Images/north-india-food/chola-bhatura.jpg" alt="Chicken Biryani">
-            <p class="item-name">Chola Bhatura</p>
-            <p class="item-price">Price: Rs 180</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div>   
-         
-         <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.0</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/north-india-food/Laccha-Paratha.jpg" alt="Laccha Paratha" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Laccha Paratha</div>
+                    <div class="product-description">Layered flatbread with butter</div>
+                    <div class="product-price">30</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
             </div>
-            <img src="./Images/north-india-food/Gulab Jamun.jpg" alt="Chicken Biryani">
-            <p class="item-name">Gulab Jamun</p>
-            <p class="item-price">Price: Rs 50</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div>   
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.4.5</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/north-india-food/Honey-Chilli-Potato.jpg" alt="Chilli Potato" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Chilli Potato</div>
+                    <div class="product-description">Crispy fried potatoes in spicy sauce</div>
+                    <div class="product-price">150</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
             </div>
-            <img src="./Images/chinese/chowmein.jpg" alt="Chicken Biryani">
-            <p class="item-name">Chowmein</p>
-            <p class="item-price">Price: Rs 150</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div>   
-        
-        <div class="item-card">
-            <div class="card-top">
-                <i class="fa fa-star" id="rating">$.5.0</i>
-                <i class="fa fa-heart-o add-to-cart" aria-label="Add to favorites"></i>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/north-india-food/chola-bhatura.jpg" alt="Chole Bhature" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Chole Bhature</div>
+                    <div class="product-description">Spicy chickpea curry with fried bread</div>
+                    <div class="product-price">180</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
             </div>
-            <img src="./Images/paneer/paneer-do-pyaza.jpg" alt="Chicken Biryani">
-            <p class="item-name">Paneer Do Pyaza</p>
-            <p class="item-price">Price: Rs 270</p>
-            <a href="/login" id="buy">Buy Now</a>
-        </div>  
-         
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.0</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/north-india-food/Gulab Jamun.jpg" alt="Gulab Jamun" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Gulab Jamun</div>
+                    <div class="product-description">Sweet milk-based dessert</div>
+                    <div class="product-price">50</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/chinese/chowmein.jpg" alt="Veg Chowmein" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Veg Chowmein</div>
+                    <div class="product-description">Stir-fried noodles with vegetables</div>
+                    <div class="product-price">150</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="card-top">
+                    <span class="rating">4.5</span>
+                    <i class="far fa-heart add-to-favorites"></i>
+                </div>
+                <img src="./Images/vegetable/dal-makhani.jpg" alt="Dal Makhani" class="product-image">
+                <div class="product-details">
+                    <div class="product-name">Dal Makhani</div>
+                    <div class="product-description">Creamy black lentils with butter</div>
+                    <div class="product-price">220</div>
+                    <a href="#" class="buy-btn"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    <script>
-        document.getElementById("buy").addEventListener("click", function (event) {
-            event.preventDefault();
-            alert("Please Login as a User to buy Products");
+
+    <script th:if="${isLoggedIn == null or !isLoggedIn}">
+        document.querySelectorAll(".buy-btn").forEach(function(btn) {
+            btn.addEventListener("click", function (event) {
+                event.preventDefault();
+                alert("Please Login as a User to buy Products");
+                window.location.href = "/login";
+            });
+        });
+    </script>
+    <script th:if="${isLoggedIn != null and isLoggedIn}">
+        document.querySelectorAll(".buy-btn").forEach(function(btn) {
+            btn.addEventListener("click", function (event) {
+                event.preventDefault();
+                window.location.href = "/user/dashboard";
+            });
         });
     </script>
 </body>
 
 </html>
-

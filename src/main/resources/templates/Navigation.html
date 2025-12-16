@@ -3,23 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home : Pavan Tea</title>
-    <link rel="stylesheet" href="" th:href="@{/css/Navigation.css}">
-    <link rel="stylesheet" href="" th:href="@{/css/Home.css}">
+    <title>FoodFactory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            border: 3px solid transparent;
+            background: linear-gradient(#1a1a2e, #1a1a2e) padding-box, linear-gradient(135deg, #ff6b35, #2ec4b6) border-box;
+            padding: 8px;
+        }
+        ul {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+            flex: 1;
+            margin: 0 30px;
+        }
+        li { display: flex; }
+        a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        a:hover {
+            color: white;
+            background: rgba(255, 107, 53, 0.2);
+        }
+        a.active { color: white; border: 2px solid #ff6b35; }
+    </style>
 </head>
-<body>
+<body style="display: none;">
     <nav th:fragment="navbar()">
-        <img th:src="@{/Images/logo.png}" alt="Logo" class="logo">
+        <img th:src="@{/Images/logo.png}" alt="FoodFactory Logo" class="logo">
         <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/products">Products</a></li>
-            <li><a href="/location">Locate Us</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/login">Log In <i class="fa-duotone fa-arrow-left-to-arc"></i></a></li>
+            <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/products"><i class="fas fa-utensils"></i> Products</a></li>
+            <li><a href="/location"><i class="fas fa-map-marker-alt"></i> Locate Us</a></li>
+            <li><a href="/about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
         </ul>
     </nav>
 </body>
-</html>
 
 

@@ -1,28 +1,333 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8" />
-	<title>FoodFactory</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>FoodFactory - Delicious Vegetarian Food</title>
 	<link rel="icon" type="image/x-icon" href="./Images/logo.png">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-	<link rel="stylesheet" href="" th:href="@{/css/Navigation.css}" />
-	<link rel="stylesheet" href="" th:href="@{css/Home.css}" />
 	<style>
-		body{
-			background-image: url('./Images/homepage.jpg'); 
-			 background-size: cover;
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+		:root {
+			--primary-color: #ff6b35;
+			--secondary-color: #2ec4b6;
+			--dark-bg: #0f0f1a;
+			--card-bg: rgba(255, 255, 255, 0.05);
+			--glass-border: rgba(255, 255, 255, 0.1);
 		}
-	</style>
-</head>
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		html, body {
+			font-family: 'Poppins', sans-serif;
+			overflow-x: hidden;
+			min-height: 100vh;
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f1a 100%);
+			color: white;
+			width: 100%;
+		}
+
+	/* Hero Section */
+	.hero {
+		min-height: calc(100vh - 70px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 40px 20px;
+			padding-top: 110px;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(46, 196, 182, 0.05) 100%);
+		z-index: 1;
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 2;
+		text-align: center;
+		max-width: 900px;
+		animation: fadeInUp 0.8s ease-out;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.hero h1 {
+		font-size: clamp(2.5rem, 8vw, 5rem);
+		font-weight: 800;
+		margin-bottom: 20px;
+		background: linear-gradient(135deg, #ff6b35 0%, #ff9f1c 50%, #2ec4b6 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+	}
+
+	.hero p {
+		font-size: clamp(1rem, 2vw, 1.5rem);
+		color: rgba(255, 255, 255, 0.8);
+		margin-bottom: 40px;
+		line-height: 1.8;
+		font-weight: 300;
+	}
+
+	.cta-buttons {
+		display: flex;
+		gap: 20px;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-bottom: 60px;
+	}
+
+	.cta-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding: 16px 40px;
+		background: linear-gradient(135deg, #ff6b35, #ff9f1c);
+		border: none;
+		border-radius: 50px;
+		color: white;
+		font-size: 1rem;
+		font-weight: 600;
+		text-decoration: none;
+		cursor: pointer;
+		transition: all 0.4s ease;
+		box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+	}
+
+	.cta-btn:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 20px 50px rgba(255, 107, 53, 0.5);
+	}
+
+	.cta-btn-secondary {
+		background: transparent;
+		border: 2px solid var(--secondary-color);
+		color: var(--secondary-color);
+	}
+
+	.cta-btn-secondary:hover {
+		background: var(--secondary-color);
+		color: #000;
+	}
+
+	/* Features Section */
+	.features {
+		padding: 80px 20px;
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	.section-title {
+		text-align: center;
+		font-size: 2.5rem;
+		margin-bottom: 15px;
+		background: linear-gradient(135deg, #2ec4b6, #3de0d0);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: 700;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		color: rgba(255, 255, 255, 0.6);
+		margin-bottom: 50px;
+		font-size: 1.1rem;
+	}
+
+	.features-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 30px;
+	}
+
+	.feature-card {
+		background: var(--card-bg);
+		backdrop-filter: blur(20px);
+		border: 1px solid var(--glass-border);
+		border-radius: 20px;
+		padding: 40px;
+		text-align: center;
+		transition: all 0.4s ease;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-10px);
+		border-color: var(--primary-color);
+		box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+	}
+
+	.feature-icon {
+		font-size: 3rem;
+		color: var(--primary-color);
+		margin-bottom: 20px;
+	}
+
+	.feature-card h3 {
+		font-size: 1.5rem;
+		margin-bottom: 15px;
+	}
+
+	.feature-card p {
+		color: rgba(255, 255, 255, 0.6);
+		line-height: 1.6;
+	}
+
+	/* Footer */
+	.footer {
+		background: rgba(0, 0, 0, 0.3);
+		padding: 40px 20px;
+		text-align: center;
+		border-top: 1px solid var(--glass-border);
+	}
+
+	.footer p {
+		color: rgba(255, 255, 255, 0.6);
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.hero {
+			min-height: calc(100vh - 70px);
+		}
+
+		.hero h1 {
+			margin-bottom: 15px;
+		}
+
+		.cta-buttons {
+			flex-direction: column;
+			gap: 15px;
+		}
+
+		.cta-btn {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>
 
 <body>
-	<nav th:replace="~{Navigation::navbar()}"></nav>
-	<div class="text">
-	<h1 >WELCOME TO OUR FOODFACTORY </h1>
-	<h3 >Where Quality Meets Innovation! <br /> Explore our wide range of products designed to enhance your life.</h3>
+	<!-- Navbar for Logged-in Users -->
+	<nav th:if="${isLoggedIn}" style="position: fixed; top: 0; left: 0; right: 0; height: 70px; background: rgba(15, 15, 26, 0.95); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.1);">
+		<div style="display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; color: #ff6b35;">
+			<i class="fas fa-utensils"></i>
+			<span>FoodFactory</span>
+		</div>
+		<ul style="display: flex; list-style: none; gap: 10px;">
+			<li><a href="/user/home" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 18px; border-radius: 10px; transition: all 0.3s; font-weight: 500; background: linear-gradient(135deg, #ff6b35, #ff9f1c);"><i class="fas fa-home"></i> Home</a></li>
+			<li><a href="/user/products" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 18px; border-radius: 10px; transition: all 0.3s; font-weight: 500;"><i class="fas fa-shopping-bag"></i> Products</a></li>
+			<li><a href="/user/dashboard" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 18px; border-radius: 10px; transition: all 0.3s; font-weight: 500;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+			<li><a href="/user/location" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 18px; border-radius: 10px; transition: all 0.3s; font-weight: 500;"><i class="fas fa-map-marker-alt"></i> Locate Us</a></li>
+			<li><a href="/user/about" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 18px; border-radius: 10px; transition: all 0.3s; font-weight: 500;"><i class="fas fa-info-circle"></i> About</a></li>
+		</ul>
+		<div style="display: flex; align-items: center; gap: 15px;">
+			<span style="color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 8px;">
+				<i class="fas fa-user-circle"></i> <span th:text="${name}">User</span>
+			</span>
+			<a href="/user/logout" style="color: #ff4757; text-decoration: none; padding: 10px 20px; background: rgba(255, 71, 87, 0.2); border-radius: 10px; font-weight: 500; transition: all 0.3s;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+		</div>
+	</nav>
+
+	<nav th:unless="${isLoggedIn}" style="position: sticky; top: 0; z-index: 1000; background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%); backdrop-filter: blur(20px); color: white; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); display: flex; align-items: center; justify-content: space-between; padding: 12px 40px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+		<img th:src="@{/Images/logo.png}" alt="FoodFactory Logo" style="width: 50px; height: 50px; border-radius: 10px;">
+		<ul style="list-style: none; display: flex; gap: 5px; flex: 1; margin: 0 30px;">
+			<li><a href="/home" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-home"></i> Home</a></li>
+			<li><a href="/products" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-utensils"></i> Products</a></li>
+			<li><a href="/location" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-map-marker-alt"></i> Locate Us</a></li>
+			<li><a href="/about" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-info-circle"></i> About Us</a></li>
+			<li><a href="/login" style="color: rgba(255,255,255,0.7); text-decoration: none; padding: 10px 15px; border-radius: 8px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 5px;"><i class="fas fa-sign-in-alt"></i> Log In</a></li>
+		</ul>
+	</nav>
+
+	<!-- Hero Section -->
+	<div class="hero">
+		<div class="hero-content">
+			<h1>🌿 FoodFactory</h1>
+			<p>100% Pure Vegetarian Delights<br>Crafted with Love & Finest Ingredients</p>
+			
+			<div class="cta-buttons">
+				<a href="/user/products" th:if="${isLoggedIn}" class="cta-btn">
+					<i class="fas fa-utensils"></i> Browse Menu
+				</a>
+				<a href="/products" th:unless="${isLoggedIn}" class="cta-btn">
+					<i class="fas fa-utensils"></i> Explore Menu
+				</a>
+				<a href="/about" class="cta-btn cta-btn-secondary">
+					<i class="fas fa-info-circle"></i> Learn More
+				</a>
+			</div>
+		</div>
 	</div>
-	
+
+	<!-- Features Section -->
+	<section class="features">
+		<h2 class="section-title">Why Choose Us?</h2>
+		<p class="section-subtitle">Experience the best in vegetarian cuisine</p>
+		
+		<div class="features-grid">
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-leaf"></i></div>
+				<h3>100% Vegetarian</h3>
+				<p>Pure vegetarian menu with no compromises on taste and quality</p>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-star"></i></div>
+				<h3>Premium Quality</h3>
+				<p>Fresh ingredients sourced daily for the best flavor</p>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-bolt"></i></div>
+				<h3>Fast Delivery</h3>
+				<p>Quick service without compromising on quality</p>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-heart"></i></div>
+				<h3>Customer Love</h3>
+				<p>Loved by thousands of happy customers worldwide</p>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-utensils"></i></div>
+				<h3>Diverse Menu</h3>
+				<p>North Indian, Chinese, Paneer dishes and much more</p>
+			</div>
+			
+			<div class="feature-card">
+				<div class="feature-icon"><i class="fas fa-phone"></i></div>
+				<h3>24/7 Support</h3>
+				<p>Always here to help with your questions and orders</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<div class="footer">
+		<h4 style="margin-bottom: 15px; color: var(--primary-color);">FoodFactory</h4>
+		<p>Your destination for 100% pure vegetarian food</p>
+		<p>© 2025 FoodFactory. All rights reserved.</p>
+	</div>
 </body>
 
 </html>
