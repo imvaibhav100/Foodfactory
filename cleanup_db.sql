@@ -1,0 +1,5 @@
+-- Drop old constraints and tables
+DROP TABLE IF EXISTS cart_items CASCADE;
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS "user" CASCADE;
+DROP TABLE IF EXISTS product CASCADE;
