@@ -167,6 +167,13 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    .section-subtitle {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1rem;
+        margin-bottom: 40px;
+    }
     
     .values-grid {
         display: grid;
@@ -204,6 +211,110 @@
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.95rem;
     }
+
+    /* Testimonials Section */
+    .testimonials-section {
+        margin: 60px 0;
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+
+    .testimonial-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 15px;
+        padding: 30px;
+        position: relative;
+        transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--secondary-color);
+        box-shadow: 0 15px 40px rgba(46, 196, 182, 0.2);
+    }
+
+    .testimonial-card::before {
+        content: '"';
+        font-size: 4rem;
+        color: var(--primary-color);
+        opacity: 0.2;
+        position: absolute;
+        top: 10px;
+        left: 15px;
+    }
+
+    .testimonial-text {
+        margin-bottom: 20px;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        font-size: 0.95rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-top: 20px;
+        border-top: 1px solid var(--glass-border);
+    }
+
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        font-weight: bold;
+    }
+
+    .author-info h4 {
+        color: white;
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+
+    .author-info p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+    }
+
+    .stars {
+        color: #ffc107;
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+    }
+
+    /* Responsive Testimonials */
+    @media (max-width: 768px) {
+        .testimonials-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .testimonial-card {
+            padding: 20px;
+        }
+
+        .testimonial-card::before {
+            font-size: 3rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+        }
+    }
+
     
     /* Footer */
     .footer {
@@ -293,6 +404,86 @@
                     <i class="fas fa-smile"></i>
                     <h3>Customer First</h3>
                     <p>Your satisfaction is our priority</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Testimonials Section -->
+        <div class="testimonials-section">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Real reviews from our food lovers</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Best biryani I've had in years! The flavors are authentic and the quality is unmatched. FoodFactory is my go-to now."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Rajesh Kumar</h4>
+                            <p>Biryani Lover</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Fast delivery and amazing taste! I ordered paneer tikka and it was cooked to perfection. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>Regular Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"The Chinese dishes are incredible! So much flavor and freshness. My family orders from FoodFactory every weekend."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div class="author-info">
+                            <h4>Amit Patel</h4>
+                            <p>Family Orders</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Vegetarian options are fantastic! Never thought I'd find such healthy yet tasty veg dishes. Keep it up!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sneha Gupta</h4>
+                            <p>Veg Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Customer service is top-notch! They addressed my concerns immediately. That's what I call real customer care."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">V</div>
+                        <div class="author-info">
+                            <h4>Vikram Singh</h4>
+                            <p>Satisfied Client</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Quality is consistent every single time. No compromise on taste or freshness. FoodFactory has my loyalty!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Meera Desai</h4>
+                            <p>Loyal Customer</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
